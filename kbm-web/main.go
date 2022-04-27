@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -16,12 +15,10 @@ func main() {
 	log.Fatal(r.Run(":8888"))
 }
 
-func indexHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "URL.PATH= %q", req.URL.Path)
+func indexHandler(c *kbm.Context) {
+	c.HTML(http.StatusOK, "<h>Hello Kbm</h1>")
 }
 
-func helloHandler(w http.ResponseWriter, req *http.Request) {
-	for k, v := range req.Header {
-		fmt.Fprintf(w, "Header[%q] = %q\n", k, v)
-	}
+func helloHandler(c *kbm.Context) {
+	c.String(http.StatusOK, "hello %s, you're at %s\n", c.Query("name"), c.Path)
 }
