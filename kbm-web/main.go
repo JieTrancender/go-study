@@ -11,6 +11,7 @@ func main() {
 	r := kbm.New()
 	r.GET("/", indexHandler)
 	r.GET("/hello", helloHandler)
+	r.POST("/login", loginHandler)
 
 	log.Fatal(r.Run(":8888"))
 }
@@ -21,4 +22,11 @@ func indexHandler(c *kbm.Context) {
 
 func helloHandler(c *kbm.Context) {
 	c.String(http.StatusOK, "hello %s, you're at %s\n", c.Query("name"), c.Path)
+}
+
+func loginHandler(c *kbm.Context) {
+	c.JSON(http.StatusOK, kbm.H{
+		"username": c.PostForm("username"),
+		"password": c.PostForm("password"),
+	})
 }
