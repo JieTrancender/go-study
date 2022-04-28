@@ -11,7 +11,13 @@ func main() {
 	r := kbm.New()
 	r.GET("/", indexHandler)
 	r.GET("/hello", helloHandler)
+	r.GET("/hello/:name", func(c *kbm.Context) {
+		c.String(http.StatusOK, "hello %s, you'are at %s\n", c.Param("name"), c.Path)
+	})
 	r.POST("/login", loginHandler)
+	r.GET("/asserts/*filepath", func(c *kbm.Context) {
+		c.JSON(http.StatusOK, kbm.H{"filepath": c.Param("filepath")})
+	})
 
 	log.Fatal(r.Run(":8888"))
 }
