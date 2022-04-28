@@ -5,7 +5,7 @@ import (
 )
 
 // HandlerFunc defines the request handler used by kbm
-type HandlerFunc func(w http.ResponseWriter, req *http.Request)
+type HandlerFunc func(*Context)
 
 // Engine implements the interface of ServeHttp
 type Engine struct {
