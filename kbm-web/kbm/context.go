@@ -57,9 +57,9 @@ func (c *Context) Status(code int) {
 	c.Writer.WriteHeader(code)
 }
 
-func (c *Context) Fail(code int, err error) {
-	c.StatusCode = code
-	c.Writer.Write([]byte(err.Error()))
+func (c *Context) Fail(code int, err string) {
+	c.index = len(c.handlers)
+	c.JSON(code, H{"message": err})
 }
 
 func (c *Context) SetHeader(key string, value string) {
@@ -90,7 +90,7 @@ func (c *Context) HTML(code int, name string, data interface{}) {
 	c.SetHeader("Context-Type", "text/html")
 	c.Status(code)
 	if err := c.engine.htmlTemplates.ExecuteTemplate(c.Writer, name, data); err != nil {
-		c.Fail(500, err)
+		c.Fail(500, err.Error())
 	}
 }
 

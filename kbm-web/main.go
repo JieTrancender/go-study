@@ -24,7 +24,7 @@ func FormatAsDate(t time.Time) string {
 }
 
 func main() {
-	r := kbm.New()
+	r := kbm.Default()
 	r.Use(kbm.Logger())
 	r.GET("/index", func(c *kbm.Context) {
 		c.HTML(http.StatusOK, "kbm.css", "<h1>Index Page</h1>")
@@ -70,6 +70,11 @@ func main() {
 	})
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./static")
+
+	r.GET("/panic", func(c *kbm.Context) {
+		names := []string{"Kbm"}
+		c.String(http.StatusOK, names[100])
+	})
 
 	log.Fatal(r.Run(":8888"))
 }
