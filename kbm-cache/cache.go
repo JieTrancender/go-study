@@ -1,7 +1,7 @@
 package kbmcache
 
 import (
-	"lru"
+	"kbm-cache/lru"
 	"sync"
 )
 
