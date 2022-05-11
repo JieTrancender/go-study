@@ -2,6 +2,12 @@ module loadgen
 
 go 1.17
 
-require lib v0.0.0
+require (
+    lib v0.0.0
+    testhelper v0.0.0
+)
 
-replace lib => ./lib
+replace (
+    lib => ./lib
+    testhelper => ./testhelper
+)

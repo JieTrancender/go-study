@@ -13,6 +13,27 @@ const (
 	RET_CODE_FATAL_CALL           RetCode = 3001
 )
 
+func GetRetCodePlain(code RetCode) string {
+	var codePlain string
+	switch code {
+	case RET_CODE_SUCCESS:
+		codePlain = "Success"
+	case RET_CODE_WARNING_CALL_TIMEOUT:
+		codePlain = "Call Timeout Warning"
+	case RET_CODE_ERROR_CALL:
+		codePlain = "Call Error"
+	case RET_CODE_ERROR_RESPONSE:
+		codePlain = "Response Error"
+	case RET_CODE_ERROR_CALEE:
+		codePlain = "Callee Error"
+	case RET_CODE_FATAL_CALL:
+		codePlain = "Call Fatal Error"
+	default:
+		codePlain = "Unknown result code"
+	}
+	return codePlain
+}
+
 const (
 	STATUS_ORIGINAL uint32 = 0
 	STATUS_STARTING uint32 = 1
